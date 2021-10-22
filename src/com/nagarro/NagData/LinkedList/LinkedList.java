@@ -13,7 +13,7 @@ import java.util.Collection;
  */
 public class LinkedList<E> implements NagCollection<E> {
 
-    private int length;
+    private int length = 0;
 
     private LinkedListNode<E> head;
     private LinkedListNode<E> tail;
