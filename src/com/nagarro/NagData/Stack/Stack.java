@@ -3,6 +3,7 @@ package com.nagarro.NagData.Stack;
 import com.nagarro.NagData.NagCollection;
 
 import java.util.Iterator;
+import java.util.Collection;
 import java.util.EmptyStackException;
 
 public class Stack<E> implements NagCollection<E> {
@@ -11,7 +12,14 @@ public class Stack<E> implements NagCollection<E> {
     private int capacity = 10;
     protected Object[] data = new Object[capacity];
 
+    // Constructors
+
     public Stack() {
+    }
+
+    public Stack(Collection<? extends E> c) {
+        for (E element : c)
+            push(element);
     }
 
     // Methods to read from stack
