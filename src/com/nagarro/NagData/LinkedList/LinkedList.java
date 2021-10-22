@@ -1,5 +1,8 @@
 package com.nagarro.NagData.LinkedList;
 
+import com.nagarro.NagData.NagCollection;
+
+import java.util.Iterator;
 import java.util.Collection;
 
 /**
@@ -8,12 +11,20 @@ import java.util.Collection;
  * java.util.LinkedList. NOT MEANT TO BE A DROP IN.
  * ref - https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html
  */
-public class LinkedList<E> {
+public class LinkedList<E> implements NagCollection<E> {
 
     private int length;
 
     private LinkedListNode<E> head;
     private LinkedListNode<E> tail;
+
+    protected LinkedListNode<E> getHead() {
+        return head;
+    }
+
+    protected LinkedListNode<E> getTail() {
+        return tail;
+    }
 
     // Constructors
 
@@ -262,6 +273,10 @@ public class LinkedList<E> {
 
         if (temp != null)
             head = temp.getPrevNode();
+    }
+
+    public Iterator<E> iterator() {
+        return new LinkedListIterator<E>(this);
     }
 
     @Override

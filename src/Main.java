@@ -10,10 +10,6 @@ class Program {
         l.add(3); // 3
         l.add(4); // 4
         l.add(5); // 5
-
-        System.out.println(l.getCenter());
-
-        System.out.println(l);
     }
 
 }
