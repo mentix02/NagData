@@ -36,8 +36,10 @@ class VectorIterator<E> implements Iterator<E> {
  */
 public class Vector<E> implements NagCollection<E> {
 
+    public static final int MIN_INITIAL_CAPACITY = 10;
+
     private int length = 0;
-    protected int _capacity = 10;
+    protected int _capacity = MIN_INITIAL_CAPACITY;
     protected Object[] data = new Object[_capacity];
 
     // Constructors
@@ -82,6 +84,11 @@ public class Vector<E> implements NagCollection<E> {
     }
 
     // Methods to manipulate Vector
+
+    public void clear() {
+        data = new Object[0];
+        length = _capacity = 0;
+    }
 
     public void append(E element) {
         if (isFull())

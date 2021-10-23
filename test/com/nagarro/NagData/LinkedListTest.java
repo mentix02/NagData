@@ -1,3 +1,5 @@
+package com.nagarro.NagData;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,8 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
-
-import com.nagarro.NagData.LinkedList;
 
 class LinkedListTest {
 

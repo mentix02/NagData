@@ -10,7 +10,7 @@ package com.nagarro.NagData;
 public class Queue<E> extends LinkedList<E> {
 
     /**
-     * Adds element to end (technically, beginning)
+     * Adds element to beginning of queue
      *
      * @param element item to insert
      */
@@ -24,11 +24,11 @@ public class Queue<E> extends LinkedList<E> {
      * @return value at top or null if queue is empty
      */
     public E dequeue() {
-        return this.removeLast();
+        return this.removeFirst();
     }
 
     public E peek() {
-        return this.getLast();
+        return this.getFirst();
     }
 
 }
