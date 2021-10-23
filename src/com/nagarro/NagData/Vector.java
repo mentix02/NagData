@@ -1,5 +1,6 @@
 package com.nagarro.NagData;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Collection;
 
@@ -33,6 +34,7 @@ class VectorIterator<E> implements Iterator<E> {
  * the very end. Old array is replaced by new bigger one.
  *
  * @param <E> type of element to store
+ * @author mentix02
  */
 public class Vector<E> implements NagCollection<E> {
 
@@ -131,6 +133,10 @@ public class Vector<E> implements NagCollection<E> {
         stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length(), " ]");
 
         return stringBuilder.toString();
+    }
+
+    public Object[] toArray() {
+        return Arrays.copyOf(data, length);
     }
 
     protected void growCapacity() {
