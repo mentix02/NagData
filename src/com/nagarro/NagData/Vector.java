@@ -1,69 +1,78 @@
-package com.nagarro.NagData.Stack;
-
-import com.nagarro.NagData.NagCollection;
+package com.nagarro.NagData;
 
 import java.util.Iterator;
 import java.util.Collection;
-import java.util.EmptyStackException;
 
-public class Stack<E> implements NagCollection<E> {
+class VectorIterator<E> implements Iterator<E> {
 
-    private int top = -1;
-    private int capacity = 10;
+    private int count = 0;
+    private final Vector<E> vector;
+
+    public VectorIterator(Vector<E> vector) {
+        this.vector = vector;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return count < vector.size();
+    }
+
+    @SuppressWarnings("unchecked")
+    public E next() {
+        return (E) vector.data[count++];
+    }
+}
+
+public class Vector<E> implements NagCollection<E> {
+
+    private int length = 0;
+    protected int capacity = 10;
     protected Object[] data = new Object[capacity];
 
     // Constructors
 
-    public Stack() {
+    public Vector() {
     }
 
-    public Stack(Collection<? extends E> c) {
+    public Vector(Collection<? extends E> c) {
         for (E element : c)
-            push(element);
+            append(element);
     }
 
-    // Methods to read from stack
+    // Methods to read data from Vector
 
-    public boolean isEmpty() {
-        return top == -1;
-    }
-
-    public boolean isFull() {
-        return top == capacity - 1;
+    public int size() {
+        return length;
     }
 
     public int getCapacity() {
         return capacity;
     }
 
-    public int size() {
-        return top + 1;
+    public boolean isEmpty() {
+        return length == 0;
+    }
+
+    public boolean isFull() {
+        return length == capacity;
     }
 
     @SuppressWarnings("unchecked")
-    public E peek() {
-        if (isFull())
-            throw new EmptyStackException();
-        return (E) data[top];
+    public E get(int index) throws IndexOutOfBoundsException {
+        return (E) data[index];
     }
 
-    // Methods to manipulate stack
+    // Methods to manipulate Vector
 
-    public void push(E element) {
-        // Makes sure data[] has room to push a new element.
+    public void append(E element) {
         if (isFull())
             growCapacity();
-        data[++top] = element;
+        data[length++] = element;
     }
 
-    @SuppressWarnings("unchecked")
-    public E pop() {
-        if (isEmpty())
-            throw new EmptyStackException();
-        return (E) data[top--];
+    public Iterator<E> iterator() {
+        return new VectorIterator<>(this);
     }
-
-    // Conversion & transformation methods
 
     public void reverse() {
         Object temp;
@@ -73,10 +82,6 @@ public class Stack<E> implements NagCollection<E> {
             data[i] = data[length - i - 1];
             data[length - i - 1] = temp;
         }
-    }
-
-    public Iterator<E> iterator() {
-        return new StackIterator<>(this);
     }
 
     @Override
@@ -95,9 +100,7 @@ public class Stack<E> implements NagCollection<E> {
         return stringBuilder.toString();
     }
 
-    // Private methods
-
-    private void growCapacity() {
+    protected void growCapacity() {
         // Create a new array of twice the size
         Object[] longerData = new Object[capacity * 2];
 
@@ -110,6 +113,5 @@ public class Stack<E> implements NagCollection<E> {
         // and update increased capacity
         capacity *= 2;
     }
-
 
 }

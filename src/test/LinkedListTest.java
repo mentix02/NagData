@@ -73,6 +73,13 @@ class LinkedListTest {
     }
 
     @Test
+    void addLast() {
+        list.addLast(100);
+        assertEquals(list.size(), 101);
+        assertEquals(list.get(100), 100);
+    }
+
+    @Test
     void LinkedListCollectionsConstructor() {
         ArrayList<Integer> arrayList = new ArrayList<>();
         for (int i = 0; i < 100; i++) {

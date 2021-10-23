@@ -11,6 +11,7 @@ class LinkedListNode<E> {
     }
 
     // Getters
+
     public E getData() {
         return data;
     }
@@ -23,7 +24,8 @@ class LinkedListNode<E> {
         return prevNode;
     }
 
-    // Setters - none required for `E data`
+    // Setters
+
     public void setPrev(LinkedListNode<E> prevNode) {
         this.prevNode = prevNode;
     }
