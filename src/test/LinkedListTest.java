@@ -7,8 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.nagarro.NagData.LinkedList.LinkedList;
-
+import com.nagarro.NagData.LinkedList;
 
 class LinkedListTest {
 
@@ -66,6 +65,26 @@ class LinkedListTest {
     }
 
     @Test
+    void add() {
+        int randomIdx = ThreadLocalRandom.current().nextInt(0, lSize - 10);
+        boolean b = list.add(randomIdx, -randomIdx);
+
+        assertTrue(b);
+        assertEquals(list.get(randomIdx), -randomIdx);
+        assertEquals(list.get(randomIdx + 1), randomIdx);
+    }
+
+    @Test
+    void reverse() {
+        int idx = lSize;
+        Object[] arr = list.toArray();
+        list.reverse();
+        for (Integer el : list) {
+            assertEquals(arr[--idx], el);
+        }
+    }
+
+    @Test
     void addToEnd() {
         list.add(100);
         assertEquals(list.size(), 101);
@@ -74,7 +93,8 @@ class LinkedListTest {
 
     @Test
     void addLast() {
-        list.addLast(100);
+        boolean b = list.addLast(100);
+        assertTrue(b);
         assertEquals(list.size(), 101);
         assertEquals(list.get(100), 100);
     }

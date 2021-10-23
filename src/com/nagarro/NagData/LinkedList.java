@@ -1,30 +1,82 @@
-package com.nagarro.NagData.LinkedList;
+package com.nagarro.NagData;
 
-import com.nagarro.NagData.NagCollection;
-
+import java.util.Objects;
 import java.util.Iterator;
 import java.util.Collection;
+
+class LinkedListNode<E> {
+
+    private final E data;
+    private LinkedListNode<E> nextNode;
+    private LinkedListNode<E> prevNode;
+
+    public LinkedListNode(E data) {
+        this.data = data;
+    }
+
+    // Getters
+
+    public E getData() {
+        return data;
+    }
+
+    public LinkedListNode<E> getNextNode() {
+        return nextNode;
+    }
+
+    public LinkedListNode<E> getPrevNode() {
+        return prevNode;
+    }
+
+    // Setters
+
+    public void setPrev(LinkedListNode<E> prevNode) {
+        this.prevNode = prevNode;
+    }
+
+    public void setNext(LinkedListNode<E> nextNode) {
+        this.nextNode = nextNode;
+    }
+
+    @Override
+    public String toString() {
+        return data.toString();
+    }
+}
+
+class LinkedListIterator<E> implements Iterator<E> {
+
+    LinkedListNode<E> current;
+
+    public LinkedListIterator(LinkedList<E> list) {
+        current = list.head;
+    }
+
+    public boolean hasNext() {
+        return current != null;
+    }
+
+    public E next() {
+        E data = current.getData();
+        current = current.getNextNode();
+        return data;
+    }
+
+}
 
 /**
  * The API for this particular implementation of
  * a LinkedList is borrowed heavily from Java's own
- * java.util.LinkedList. NOT MEANT TO BE A DROP IN.
- * ref - https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html
+ * <pre>java.util.LinkedList</pre>.
+ *
+ * NOT MEANT TO BE A DROP IN REPLACEMENT.
  */
 public class LinkedList<E> implements NagCollection<E> {
 
     private int length = 0;
 
-    private LinkedListNode<E> head;
-    private LinkedListNode<E> tail;
-
-    protected LinkedListNode<E> getHead() {
-        return head;
-    }
-
-    protected LinkedListNode<E> getTail() {
-        return tail;
-    }
+    protected LinkedListNode<E> head;
+    protected LinkedListNode<E> tail;
 
     // Constructors
 
@@ -44,13 +96,12 @@ public class LinkedList<E> implements NagCollection<E> {
         return length;
     }
 
-    public E getCenter() {
-        if (isEmpty()) return null;
-        return get(length / 2);
-    }
-
     public boolean isEmpty() {
         return length == 0;
+    }
+
+    public E getCenter() {
+        return isEmpty() ? null : get(length / 2);
     }
 
     public E element() {
@@ -88,7 +139,7 @@ public class LinkedList<E> implements NagCollection<E> {
          * List is empty. Assign head and tail
          * to newly added node.
          */
-        if (head == null) {
+        if (Objects.isNull(head)) {
             head = node;
         }
 
@@ -96,7 +147,7 @@ public class LinkedList<E> implements NagCollection<E> {
          * If previous last member exists,
          * make it point to new tail.
          */
-        if (tail != null) {
+        if (!Objects.isNull(tail)) {
             tail.setNext(node);
         }
 
@@ -116,6 +167,11 @@ public class LinkedList<E> implements NagCollection<E> {
         return add(element);
     }
 
+    /**
+     * Simply replaces the head of list with new element
+     * @param element object to be inserted
+     * @return always true
+     */
     public boolean addFirst(E element) {
         if (length == 0)
             return add(element);
@@ -129,6 +185,13 @@ public class LinkedList<E> implements NagCollection<E> {
         return true;
     }
 
+    /**
+     * Inserts element AT index provided.
+     * O(n-1) -> O(n) worst case
+     * @param index position to insert element at
+     * @param element object to be inserted
+     * @return always true
+     */
     public boolean add(int index, E element) {
 
         if (index < 0)
@@ -166,6 +229,12 @@ public class LinkedList<E> implements NagCollection<E> {
 
     // Methods to remove elements from list
 
+    /**
+     * Clears entire list. Traversing and manually setting
+     * prev and next node addresses is required since the
+     * GC will count next and prev refs from each node and
+     * won't delete them by itself.
+     */
     public void clear() {
         LinkedListNode<E> next, node = head;
         while (node != null) {
@@ -276,7 +345,7 @@ public class LinkedList<E> implements NagCollection<E> {
     }
 
     public Iterator<E> iterator() {
-        return new LinkedListIterator<E>(this);
+        return new LinkedListIterator<>(this);
     }
 
     @Override
