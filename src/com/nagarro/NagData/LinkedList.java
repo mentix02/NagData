@@ -67,7 +67,7 @@ class LinkedListIterator<E> implements Iterator<E> {
 /**
  * <tt>LinkedList</tt> implements a generic doubly linked list that supports
  * iteration, insertion, deletion, and other helpful methods. Also used to
- * implement the {@link com.nagarro.NagData.Queue Queue} data structure.
+ * implement the {@link com.nagarro.NagData.LinearQueue Queue} data structure.
  *
  * @param <E> type of element to store
  * @author mentix02

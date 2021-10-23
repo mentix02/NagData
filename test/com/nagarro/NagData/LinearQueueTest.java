@@ -5,14 +5,14 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class QueueTest {
+class LinearQueueTest {
 
-    static Queue<Integer> queue;
+    static LinearQueue<Integer> queue;
     final static int qSize = 100;
 
     @BeforeEach
     void setUp() {
-        queue = new Queue<>();
+        queue = new LinearQueue<>();
         for (int i = 0; i < 100; i++)
             queue.enqueue(i);
     }
@@ -24,7 +24,7 @@ class QueueTest {
 
     @Test
     void enqueue() {
-        queue = new Queue<>();
+        queue = new LinearQueue<>();
         queue.enqueue(0);
         queue.enqueue(1);
         assertEquals(0, queue.peek());
