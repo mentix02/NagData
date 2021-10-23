@@ -54,6 +54,14 @@ class LinkedListTest {
     }
 
     @Test
+    void remove() {
+        int randomIdx = ThreadLocalRandom.current().nextInt(0, lSize - 10);
+        int removedEl = list.remove(randomIdx);
+        assertEquals(randomIdx, removedEl);
+        assertEquals(list.get(randomIdx), randomIdx + 1);
+    }
+
+    @Test
     void getCenter() {
         assertEquals(list.getCenter(), lSize / 2);
     }
