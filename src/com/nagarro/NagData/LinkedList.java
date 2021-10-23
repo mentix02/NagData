@@ -65,11 +65,12 @@ class LinkedListIterator<E> implements Iterator<E> {
 }
 
 /**
- * The API for this particular implementation of
- * a LinkedList is borrowed heavily from Java's own
- * <pre>java.util.LinkedList</pre>.
+ * <tt>LinkedList</tt> implements a generic doubly linked list that supports
+ * iteration, insertion, deletion, and other helpful methods. Also used to
+ * implement the {@link com.nagarro.NagData.Queue Queue} data structure.
  *
- * NOT MEANT TO BE A DROP IN REPLACEMENT.
+ * @param <E> type of element to store
+ * @author mentix02
  */
 public class LinkedList<E> implements NagCollection<E> {
 
@@ -130,6 +131,12 @@ public class LinkedList<E> implements NagCollection<E> {
         return node.getData();
     }
 
+    public boolean contains(E toFind) {
+        for (E el : this)
+            if (el == toFind) return true;
+        return false;
+    }
+
     // Methods to add elements to list
 
     public boolean add(E element) {
@@ -169,6 +176,7 @@ public class LinkedList<E> implements NagCollection<E> {
 
     /**
      * Simply replaces the head of list with new element
+     *
      * @param element object to be inserted
      * @return always true
      */
@@ -188,7 +196,8 @@ public class LinkedList<E> implements NagCollection<E> {
     /**
      * Inserts element AT index provided.
      * O(n-1) -> O(n) worst case
-     * @param index position to insert element at
+     *
+     * @param index   position to insert element at
      * @param element object to be inserted
      * @return always true
      */

@@ -2,6 +2,12 @@ package com.nagarro.NagData;
 
 import java.util.EmptyStackException;
 
+/**
+ * A <tt>Stack</tt> implemented via an array based <tt>Vector</tt>.
+ *
+ * @param <E> type of element to store
+ * @author mentix02
+ */
 public class Stack<E> extends Vector<E> {
 
     private int top = -1;
@@ -15,7 +21,7 @@ public class Stack<E> extends Vector<E> {
 
     @Override
     public boolean isFull() {
-        return top == capacity - 1;
+        return top == _capacity - 1;
     }
 
     @Override
@@ -25,7 +31,7 @@ public class Stack<E> extends Vector<E> {
 
     @SuppressWarnings("unchecked")
     public E peek() {
-        if (isFull())
+        if (isEmpty())
             throw new EmptyStackException();
         return (E) data[top];
     }

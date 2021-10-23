@@ -23,20 +23,39 @@ class VectorIterator<E> implements Iterator<E> {
     }
 }
 
+/**
+ * <tt>Vector</tt> class implements an infinitely
+ * growing generic array.
+ * <p>
+ * Every time the default array reached max capacity,
+ * the old elements are copied into an array twice as big
+ * as the old one and the new element is inserted at
+ * the very end. Old array is replaced by new bigger one.
+ *
+ * @param <E> type of element to store
+ */
 public class Vector<E> implements NagCollection<E> {
 
     private int length = 0;
-    protected int capacity = 10;
-    protected Object[] data = new Object[capacity];
+    protected int _capacity = 10;
+    protected Object[] data = new Object[_capacity];
 
     // Constructors
 
     public Vector() {
     }
 
+    /**
+     * Creates a <tt>Vector</tt> from a standard <tt>Collection</tt> object
+     *
+     * @param c collection to create array from
+     */
     public Vector(Collection<? extends E> c) {
-        for (E element : c)
-            append(element);
+        int idx = 0;
+        length = _capacity = c.size();
+        data = new Object[_capacity];
+        for (E el : c)
+            data[idx++] = el;
     }
 
     // Methods to read data from Vector
@@ -45,8 +64,8 @@ public class Vector<E> implements NagCollection<E> {
         return length;
     }
 
-    public int getCapacity() {
-        return capacity;
+    public int capacity() {
+        return _capacity;
     }
 
     public boolean isEmpty() {
@@ -54,7 +73,7 @@ public class Vector<E> implements NagCollection<E> {
     }
 
     public boolean isFull() {
-        return length == capacity;
+        return length == _capacity;
     }
 
     @SuppressWarnings("unchecked")
@@ -70,10 +89,17 @@ public class Vector<E> implements NagCollection<E> {
         data[length++] = element;
     }
 
+    public void set(int index, E element) throws IndexOutOfBoundsException {
+        this.data[index] = element;
+    }
+
     public Iterator<E> iterator() {
         return new VectorIterator<>(this);
     }
 
+    /**
+     * Reverses internal <tt>data</tt> array in-place in O(n) time.
+     */
     public void reverse() {
         Object temp;
         int length = size();
@@ -102,16 +128,16 @@ public class Vector<E> implements NagCollection<E> {
 
     protected void growCapacity() {
         // Create a new array of twice the size
-        Object[] longerData = new Object[capacity * 2];
+        Object[] longerData = new Object[_capacity * 2];
 
         // Copy old elements into new array
-        if (capacity >= 0)
-            System.arraycopy(data, 0, longerData, 0, capacity);
+        if (_capacity >= 0)
+            System.arraycopy(data, 0, longerData, 0, _capacity);
 
         // Replace small old array with larger one
         data = longerData;
         // and update increased capacity
-        capacity *= 2;
+        _capacity *= 2;
     }
 
 }
