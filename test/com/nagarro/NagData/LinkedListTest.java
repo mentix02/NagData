@@ -32,6 +32,15 @@ class LinkedListTest {
     }
 
     @Test
+    void contains() {
+        int shouldFind = ThreadLocalRandom.current().nextInt(0, lSize - 10);
+        int shouldNotFind = -ThreadLocalRandom.current().nextInt(0, lSize - 10);
+
+        assertTrue(list.contains(shouldFind));
+        assertFalse(list.contains(shouldNotFind));
+    }
+
+    @Test
     void isEmpty() {
         list.clear();
         assertTrue(list.isEmpty());
