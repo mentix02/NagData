@@ -133,7 +133,8 @@ public class LinkedList<E> implements NagCollection<E> {
 
     public boolean contains(E toFind) {
         for (E el : this)
-            if (el == toFind) return true;
+            if (el.equals(toFind))
+                return true;
         return false;
     }
 
@@ -296,11 +297,19 @@ public class LinkedList<E> implements NagCollection<E> {
         return toReturn;
     }
 
+    /**
+     * Traverses list until <code>index</code> position to remove
+     * node. Throws <code>IllegalArgumentException</code> for
+     * invalid indices (negative or >= length).
+     *
+     * @param index position of element to delete
+     * @return element to be deleted
+     */
     public E remove(int index) {
-        if (length == 0 || index <= 0)
+        if (length == 0 || index == 0)
             return removeFirst();
-        else if (index >= length)
-            throw new IllegalArgumentException("Index cannot be greater than list length.");
+        else if (index >= length || index < 0)
+            throw new IllegalArgumentException("Index cannot be negative or exceed list length.");
         else if (index == length - 1)
             return removeLast();
 

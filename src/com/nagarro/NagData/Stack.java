@@ -45,6 +45,7 @@ public class Stack<E> extends Vector<E> {
         data[++top] = element;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public E pop() {
         if (isEmpty())

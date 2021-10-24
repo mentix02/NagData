@@ -41,12 +41,26 @@ public class Vector<E> implements NagCollection<E> {
     public static final int MIN_INITIAL_CAPACITY = 10;
 
     private int length = 0;
+    /**
+     * Actual container to store data in.
+     */
+    protected Object[] data;
     protected int _capacity = MIN_INITIAL_CAPACITY;
-    protected Object[] data = new Object[_capacity];
 
     // Constructors
 
     public Vector() {
+        data = new Object[_capacity];
+    }
+
+    /**
+     * Initialize a <code>Vector</code> object with a provided initial capacity.
+     *
+     * @param size number of items to reserve memory for
+     */
+    public Vector(int size) {
+        _capacity = size;
+        data = new Object[_capacity];
     }
 
     /**
@@ -66,6 +80,13 @@ public class Vector<E> implements NagCollection<E> {
 
     public int size() {
         return length;
+    }
+
+    public boolean contains(E toFind) {
+        for (E el : this)
+            if (el.equals(toFind))
+                return true;
+        return false;
     }
 
     public int capacity() {
@@ -96,6 +117,68 @@ public class Vector<E> implements NagCollection<E> {
         if (isFull())
             growCapacity();
         data[length++] = element;
+    }
+
+    /**
+     * @param idx position of element to be deleted
+     * @return element at idx which was deleted
+     */
+    @SuppressWarnings("unchecked")
+    public E remove(int idx) {
+        if (isEmpty())
+            return null;
+        else if (idx < 0)
+            throw new IllegalArgumentException("Cannot delete at negative index.");
+        else if (idx == 0)
+            return removeFirst();
+
+        E toReturn = (E) data[idx];
+        if (length - idx >= 0)
+            System.arraycopy(data, idx + 1, data, idx, length - idx);
+        length--;
+        return toReturn;
+    }
+
+    /**
+     * Removes last element.
+     *
+     * @return last element before it is deleted or null if vector is empty
+     */
+    @SuppressWarnings("unchecked")
+    public E remove() {
+        if (isEmpty())
+            return null;
+        E toReturn = (E) data[length - 1];
+        data[--length] = null;
+        return toReturn;
+    }
+
+    @SuppressWarnings("unchecked")
+    public E removeFirst() {
+        return remove(0);
+    }
+
+    public E pop() {
+        return remove();
+    }
+
+    public void insert(int index, E element) {
+        if (index < 0)
+            throw new IllegalArgumentException("Cannot insert at negative index.");
+        else if (index >= length) {
+            append(element);
+            return;
+        }
+
+        if (isFull())
+            growCapacity();
+
+        length++;
+
+        if (length - index >= 0)
+            System.arraycopy(data, index, data, index + 1, length - index);
+
+        data[index] = element;
     }
 
     public void set(int index, E element) throws IndexOutOfBoundsException {

@@ -36,6 +36,38 @@ public class VectorTest {
     }
 
     @Test
+    void remove() {
+        int uLimit = 10;
+        vector = new Vector<>(10);
+
+        for (int i = 0; i < uLimit; i++)
+            vector.append(i);
+
+        assertEquals(9, vector.get(uLimit - 1));
+        assertEquals(9, vector.remove());
+        assertEquals(uLimit - 1, vector.size());
+
+        assertEquals(3, vector.remove(3));
+        assertEquals(uLimit - 2, vector.size());
+        assertEquals(4, vector.get(3));
+    }
+
+    @Test
+    void insert() {
+        vector = new Vector<>(10);
+
+        for (int i = 0; i < 10; i++)
+            vector.append(i);
+
+        assertEquals(10, vector.capacity());
+
+        vector.insert(3, -3);
+        assertEquals(-3, vector.get(3));
+        assertEquals(3, vector.get(4));
+        assertEquals(20, vector.capacity());
+    }
+
+    @Test
     void reverse() {
         vector.reverse();
         Vector<Integer> reversedVector = new Vector<>();
