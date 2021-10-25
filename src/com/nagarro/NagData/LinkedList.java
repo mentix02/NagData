@@ -346,7 +346,7 @@ public class LinkedList<E> implements NagCollection<E> {
         return arr;
     }
 
-    public void reverse() {
+    public void selfReverse() {
         LinkedListNode<E>
                 temp = null,
                 current = head;
@@ -364,6 +364,14 @@ public class LinkedList<E> implements NagCollection<E> {
 
     public Iterator<E> iterator() {
         return new LinkedListIterator<>(this);
+    }
+
+    @Override
+    public Object clone() {
+        LinkedList<E> linkedList = new LinkedList<>();
+        for (E el : linkedList)
+            linkedList.add(el);
+        return linkedList;
     }
 
     @Override

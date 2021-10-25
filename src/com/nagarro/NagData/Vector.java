@@ -119,6 +119,14 @@ public class Vector<E> implements NagCollection<E> {
         data[length++] = element;
     }
 
+    public void add(E element) {
+        append(element);
+    }
+
+    public void add(int index, E element) {
+        insert(index, element);
+    }
+
     /**
      * @param idx position of element to be deleted
      * @return element at idx which was deleted
@@ -216,6 +224,13 @@ public class Vector<E> implements NagCollection<E> {
         stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length(), " ]");
 
         return stringBuilder.toString();
+    }
+
+    public Object clone() {
+        Vector<E> vector = new Vector<>(length);
+        vector.data = this.data.clone();
+        vector.length = length;
+        return vector;
     }
 
     public Object[] toArray() {

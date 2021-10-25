@@ -95,7 +95,7 @@ class LinkedListTest {
     void reverse() {
         int idx = lSize;
         Object[] arr = list.toArray();
-        list.reverse();
+        list.selfReverse();
         for (Integer el : list) {
             assertEquals(arr[--idx], el);
         }

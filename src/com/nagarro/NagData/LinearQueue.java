@@ -36,4 +36,11 @@ public class LinearQueue<E> extends LinkedList<E> implements Queue<E> {
         this.addLast(element);
     }
 
+    @Override
+    public Queue<E> reverse() {
+        LinearQueue<E> lq = new LinearQueue<>();
+        lq.selfReverse();
+        return lq;
+    }
+
 }
