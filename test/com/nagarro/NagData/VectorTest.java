@@ -16,8 +16,10 @@ public class VectorTest {
     @BeforeEach
     void setUp() {
         vector = new Vector<>();
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < vSize / 2; i++)
             vector.append(i);
+        for (int i = vSize / 2; i < vSize; i++)
+            vector.add(i);
     }
 
     @Test
@@ -54,22 +56,33 @@ public class VectorTest {
 
     @Test
     void insert() {
-        vector = new Vector<>(10);
+        vector = new Vector<>(30);
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 30; i++)
             vector.append(i);
 
-        assertEquals(10, vector.capacity());
+        assertEquals(30, vector.capacity());
 
         vector.insert(3, -3);
         assertEquals(-3, vector.get(3));
         assertEquals(3, vector.get(4));
-        assertEquals(20, vector.capacity());
+        assertEquals(60, vector.capacity());
+
+        vector.add(20, -20);
+        assertEquals(-20, vector.get(20));
+        assertEquals(19, vector.get(21));
     }
 
     @Test
-    void reverse() {
-        vector.reverse();
+    void contains() {
+        int randomVal = ThreadLocalRandom.current().nextInt(0, vSize);
+        assertTrue(vector.contains(randomVal));
+        assertFalse(vector.contains(-randomVal));
+    }
+
+    @Test
+    void selfReverse() {
+        vector.selfReverse();
         Vector<Integer> reversedVector = new Vector<>();
         for (int i = 99; i >= 0; i--)
             reversedVector.append(i);

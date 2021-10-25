@@ -161,7 +161,6 @@ public class Vector<E> implements NagCollection<E> {
         return toReturn;
     }
 
-    @SuppressWarnings("unchecked")
     public E removeFirst() {
         return remove(0);
     }
@@ -200,7 +199,7 @@ public class Vector<E> implements NagCollection<E> {
     /**
      * Reverses internal <tt>data</tt> array in-place in O(n) time.
      */
-    public void reverse() {
+    public void selfReverse() {
         Object temp;
         int length = size();
         for (int i = 0; i < length / 2; i++) {
@@ -226,6 +225,7 @@ public class Vector<E> implements NagCollection<E> {
         return stringBuilder.toString();
     }
 
+    @SuppressWarnings("MethodDoesntCallSuperMethod")
     public Object clone() {
         Vector<E> vector = new Vector<>(length);
         vector.data = this.data.clone();
