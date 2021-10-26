@@ -389,6 +389,7 @@ public class LinkedList<E> implements NagCollection<E> {
         return new LinkedListIterator<>(this);
     }
 
+    @SuppressWarnings("MethodDoesntCallSuperMethod")
     @Override
     public Object clone() {
         LinkedList<E> linkedList = new LinkedList<>();

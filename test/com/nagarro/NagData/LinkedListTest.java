@@ -92,6 +92,25 @@ class LinkedListTest {
     }
 
     @Test
+    void addExtends() {
+
+        int idx = 0;
+        Integer[] extArr = new Integer[] {-3, -2, -1};
+
+        LinkedList<Integer> extList = new LinkedList<>();
+        assertTrue(extList.add(extArr));
+
+        for (int el : extList)
+            assertEquals(extArr[idx++], el);
+
+        assertTrue(list.add(extList));
+
+        for (int i = 2; i >= 0; i--) {
+            assertEquals(extArr[i], list.removeLast());
+        }
+    }
+
+    @Test
     void reverse() {
         int idx = lSize;
         Object[] arr = list.toArray();
@@ -117,7 +136,7 @@ class LinkedListTest {
     }
 
     @Test
-    void LinkedListCollectionsConstructor() {
+    void collectionConstructor() {
         ArrayList<Integer> arrayList = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             arrayList.add(i);
