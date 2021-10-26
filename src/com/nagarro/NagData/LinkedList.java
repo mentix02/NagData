@@ -53,7 +53,7 @@ class LinkedListIterator<E> implements Iterator<E> {
     }
 
     public boolean hasNext() {
-        return current != null;
+        return !Objects.isNull(current);
     }
 
     public E next() {
@@ -273,6 +273,8 @@ public class LinkedList<E> implements NagCollection<E> {
             head = newHead;
         }
 
+        length--;
+
         return toReturn;
     }
 
@@ -293,6 +295,8 @@ public class LinkedList<E> implements NagCollection<E> {
             newTail.setNext(null);
             tail = newTail;
         }
+
+        length--;
 
         return toReturn;
     }

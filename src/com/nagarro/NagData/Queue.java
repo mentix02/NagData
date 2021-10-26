@@ -36,6 +36,8 @@ public interface Queue<E> extends NagCollection<E> {
 
     Object clone();
 
+    boolean isEmpty();
+
     Queue<E> reverse();
 
     void enqueue(E element);

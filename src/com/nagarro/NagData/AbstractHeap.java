@@ -8,7 +8,7 @@ import java.util.Objects;
  * @param <E> type of data to store
  * @author mentix02
  */
-public abstract class Heap<E extends Comparable<E>> {
+public abstract class AbstractHeap<E extends Comparable<E>> {
 
     protected Vector<E> heap = new Vector<>();
 
@@ -16,10 +16,10 @@ public abstract class Heap<E extends Comparable<E>> {
 
     // Read from heap
 
-    public Heap() {
+    public AbstractHeap() {
     }
 
-    public Heap(Vector<E> vector) {
+    public AbstractHeap(Vector<E> vector) {
         int heapSize = vector.size();
         heap = new Vector<>(heapSize);
 

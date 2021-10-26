@@ -2,12 +2,12 @@ package com.nagarro.NagData;
 
 /**
  * Used to extract objects of the highest priority. Inherits
- * from {@link Heap}.
+ * from {@link AbstractHeap}.
  *
  * @param <E> type of data to store
  * @author mentix02
  */
-public class MaxHeap<E extends Comparable<E>> extends Heap<E> {
+public class MaxHeap<E extends Comparable<E>> extends AbstractHeap<E> {
 
     public MaxHeap() {
 
