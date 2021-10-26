@@ -1,52 +1,76 @@
 package com.nagarro.NagData;
 
 import java.util.Iterator;
-
-class NTreeDepthIterator<E> implements Iterator<E> {
-    NTreeDepthIterator() {
-    }
-
-    public boolean hasNext() {
-        return false;
-    }
-
-    public E next() {
-        return null;
-    }
-}
+import java.util.Objects;
 
 /**
  * Implements a level order traversal over each
  * node of the n-ary tree.
-
+ *
  * @param <E> type of object to return each {@link #next()} call
  */
 class NTreeBreadthIterator<E> implements Iterator<E> {
 
-    private final LinkedList<E> list = new LinkedList<>();
-    private final Queue<NTree<E>> q = new LinearQueue<>();
+    private final Queue<NTree<E>> s = new LinearQueue<>();
 
     NTreeBreadthIterator(NTree<E> tree) {
-        q.enqueue(tree);
+        s.enqueue(tree);
     }
 
     public boolean hasNext() {
-        return !q.isEmpty();
+        return !s.isEmpty();
     }
 
     public E next() {
-        if (!list.isEmpty()) {
-            return list.removeFirst();
-        }
-        int size = q.size();
-        for (int i = 0; i < size; i++) {
-            NTree<E> node = q.dequeue();
-            list.add(node.getData());
+        NTree<E> node = s.dequeue();
+        for (NTree<E> child : node.getChildren())
+            s.enqueue(child);
+        return node.getData();
+    }
+}
 
-            for (NTree<E> child : node.getChildren())
-                q.enqueue(child);
+/**
+ * Do not use. Does not work. Kept for sentimental purposes.
+ *
+ * @param <E>
+ */
+class NTreeDepthIterator<E> implements Iterator<E> {
+
+    private NTree<E> root;
+    private int currentRootIndex = 0;
+    private final Stack<Pair<E>> stack = new Stack<>();
+    private final Vector<E> postorderTraversal = new Vector<>();
+
+    static class Pair<E> {
+        public NTree<E> node;
+        public int childrenIndex;
+
+        public Pair(NTree<E> node, int childrenIndex) {
+            this.node = node;
+            this.childrenIndex = childrenIndex;
         }
-        return list.removeFirst();
+    }
+
+    NTreeDepthIterator(NTree<E> root) {
+        this.root = root;
+    }
+
+    public boolean hasNext() {
+        return !Objects.isNull(root) || !stack.isEmpty();
+    }
+
+    public E next() {
+        if (!Objects.isNull(root)) {
+            stack.push(new Pair<>(root, currentRootIndex));
+            currentRootIndex = 0;
+
+            if (!root.isLeaf())
+                root = root.getChildren().get(0);
+            else
+                root = null;
+        }
+        Pair<E> temp = stack.pop();
+        return temp.node.getData();
     }
 
 }
@@ -111,6 +135,13 @@ public class NTree<E> implements NagCollection<E> {
         return layer;
     }
 
+    public int depth() {
+        int maxDepth = 0;
+        for (NTree<E> node : children)
+            maxDepth = Math.max(maxDepth, node.depth());
+        return maxDepth + 1;
+    }
+
     public boolean contains(E toFind) {
         if (data.equals(toFind))
             return true;
@@ -145,8 +176,43 @@ public class NTree<E> implements NagCollection<E> {
         return node;
     }
 
-    public NTree<E> removeChild() {
-        return children.removeLast();
+    public E removeChild() {
+        NTree<E> lastChild = children.removeLast();
+        if (Objects.isNull(lastChild))
+            throw new IllegalStateException();
+        return lastChild.getData();
+    }
+
+    public String strBreadthFirst() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (E node : this) {
+            stringBuilder.append(node);
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * @return returns a depth-first post order traversal string
+     */
+    public String strDepthFirstPostOrder() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (NTree<E> node : getChildren()) {
+            stringBuilder.append(node.strDepthFirstPostOrder());
+        }
+        stringBuilder.append(getData());
+        return stringBuilder.toString();
+    }
+
+    /**
+     * @return returns a depth-first pre order traversal string
+     */
+    public String strDepthFirstPreOrder() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(getData());
+        for (NTree<E> node : children) {
+            stringBuilder.append(node.strDepthFirstPreOrder());
+        }
+        return stringBuilder.toString();
     }
 
     @Override
@@ -156,7 +222,7 @@ public class NTree<E> implements NagCollection<E> {
 
     @Override
     public String toString() {
-        return data.toString();
+        return String.format("{ val: %s, childrenSize: %d }", this.data.toString(), this.children.size());
     }
 
 }

@@ -233,6 +233,13 @@ public class Vector<E> implements NagCollection<E> {
         return vector;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Vector<?> vector = (Vector<?>) o;
+        return length == vector.length && Arrays.equals(data, vector.data);
+    }
+
     public Object[] toArray() {
         return Arrays.copyOf(data, length);
     }

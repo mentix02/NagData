@@ -4,6 +4,17 @@ public class Main {
 
     public static void main(String[] args) {
 
+        /*
+                  0
+                / | \
+               /  |  \
+              1   2   3
+             / \    / | \
+            4   5  6  7  8
+                      |
+                      9
+         */
+
         NTree<Integer> r = new NTree<>(0);
         NTree<Integer> r1 = r.addChild(1);
         r.addChild(2);
@@ -15,7 +26,9 @@ public class Main {
         r3.addChild(8);
         r31.addChild(9);
 
-        System.out.println(r.elementsAtLevel(2));
+        System.out.println(r.strBreadthFirst());
+        System.out.println(r.strDepthFirstPreOrder());
+        System.out.println(r.strDepthFirstPostOrder());
 
     }
 

@@ -180,6 +180,20 @@ public class LinkedList<E> implements NagCollection<E> {
         return add(element);
     }
 
+    public boolean add(LinkedList<E> list) {
+        for (E el : list) {
+            add(el);
+        }
+        return true;
+    }
+
+    public boolean add(E[] arr) {
+        for (E el : arr) {
+            add(el);
+        }
+        return true;
+    }
+
     /**
      * Simply replaces the head of list with new element
      *
