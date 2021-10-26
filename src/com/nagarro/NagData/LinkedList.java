@@ -91,6 +91,11 @@ public class LinkedList<E> implements NagCollection<E> {
         }
     }
 
+    @Override
+    protected void finalize() {
+        clear();
+    }
+
     // Methods to read data from list
 
     public int size() {
