@@ -39,7 +39,7 @@ class MaxPriorityQueueTest {
 
     @Test
     void reverse() {
-        queue = queue.reverse();
+        queue = queue.makeReverseQueue();
         assertEquals(-3, queue.dequeue());
         assertEquals(3, queue.dequeue());
         assertEquals(6, queue.dequeue());

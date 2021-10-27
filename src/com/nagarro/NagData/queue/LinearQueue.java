@@ -11,6 +11,14 @@ import com.nagarro.NagData.LinkedList;
  */
 public class LinearQueue<E> extends LinkedList<E> implements Queue<E> {
 
+    public LinearQueue() {
+    }
+
+    public LinearQueue(LinearQueue<E> queue) {
+        for (E el : queue)
+            enqueue(el);
+    }
+
     /**
      * Reads element inserted the first time in queue.
      *
@@ -39,8 +47,8 @@ public class LinearQueue<E> extends LinkedList<E> implements Queue<E> {
     }
 
     @Override
-    public Queue<E> reverse() {
-        LinearQueue<E> lq = new LinearQueue<>();
+    public Queue<E> makeReverseQueue() {
+        LinearQueue<E> lq = new LinearQueue<>(this);
         lq.selfReverse();
         return lq;
     }

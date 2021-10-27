@@ -29,7 +29,7 @@ public class MinPriorityQueue<E extends Comparable<E>> extends MinHeap<E> implem
         return isEmpty() ? null : heap.get(0);
     }
 
-    public Queue<E> reverse() {
+    public Queue<E> makeReverseQueue() {
         return new MaxPriorityQueue<>(this.heap);
     }
 

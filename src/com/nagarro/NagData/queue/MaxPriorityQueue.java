@@ -36,7 +36,7 @@ public class MaxPriorityQueue<E extends Comparable<E>> extends MaxHeap<E> implem
         return isEmpty() ? null : heap.get(0);
     }
 
-    public Queue<E> reverse() {
+    public Queue<E> makeReverseQueue() {
         return new MinPriorityQueue<>(this.heap);
     }
 

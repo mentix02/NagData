@@ -40,7 +40,7 @@ public interface Queue<E> extends NagCollection<E> {
 
     boolean isEmpty();
 
-    Queue<E> reverse();
+    Queue<E> makeReverseQueue();
 
     void enqueue(E element);
 
