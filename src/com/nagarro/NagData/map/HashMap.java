@@ -115,6 +115,19 @@ public class HashMap<K, V> implements NagCollection<MapEntry<K, V>> {
         return buckets.length;
     }
 
+    public boolean contains(K key) {
+        int bucketIdx = getHash(key) % buckets.length;
+        MapEntry<K, V> bucket = buckets[bucketIdx];
+
+        while (bucket != null) {
+            if (bucket.getKey().equals(key)) {
+                return true;
+            }
+            bucket = bucket.getNext();
+        }
+        return false;
+    }
+
     public V get(K key) {
         int bucketIdx = getHash(key) % buckets.length;
         MapEntry<K, V> bucket = buckets[bucketIdx];
@@ -129,6 +142,32 @@ public class HashMap<K, V> implements NagCollection<MapEntry<K, V>> {
     }
 
     // Manipulate
+
+        public boolean remove(K key) {
+        int bucketIdx = getHash(key) % buckets.length;
+        MapEntry<K, V> bucket = buckets[bucketIdx];
+
+        // No bucket exists
+        if (bucket == null)
+            return false;
+
+        while (bucket != null) {
+            if (bucket.getKey().equals(key)) {
+                if (bucket.hasPrev()) {
+                    bucket.getPrev().setNext(bucket.getNext());
+                    if (bucket.hasNext())
+                        bucket.getNext().setPrev(bucket.getPrev());
+                } else {
+                    buckets[bucketIdx] = null;
+                }
+                length--;
+                return true;
+            }
+            bucket = bucket.getNext();
+        }
+
+        return false;
+    }
 
     public void put(K key, V value) {
 
@@ -157,6 +196,7 @@ public class HashMap<K, V> implements NagCollection<MapEntry<K, V>> {
             if (existing.getKey().equals(key)) {
                 existing.setValue(value);
             } else {
+                entry.setPrev(existing);
                 existing.setNext(entry);
                 length++;
             }

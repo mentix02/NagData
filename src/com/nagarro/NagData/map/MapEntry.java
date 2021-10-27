@@ -7,6 +7,7 @@ public class MapEntry<K, V> {
     private V value;
     final private K key;
     private MapEntry<K, V> next;
+    private MapEntry<K, V> prev;
 
     public MapEntry(K key, V value) {
         this.key = key;
@@ -23,12 +24,20 @@ public class MapEntry<K, V> {
         return !Objects.isNull(next);
     }
 
+    protected boolean hasPrev() {
+        return !Objects.isNull(prev);
+    }
+
     public V getValue() {
         return value;
     }
 
     public MapEntry<K, V> getNext() {
         return next;
+    }
+
+    public MapEntry<K, V> getPrev() {
+        return prev;
     }
 
     // Setters
@@ -39,6 +48,10 @@ public class MapEntry<K, V> {
 
     public void setNext(MapEntry<K, V> next) {
         this.next = next;
+    }
+
+    public void setPrev(MapEntry<K, V> prev) {
+        this.prev = prev;
     }
 
     @SuppressWarnings("unchecked")
