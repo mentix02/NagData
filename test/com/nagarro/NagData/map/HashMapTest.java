@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,6 +31,15 @@ class HashMapTest {
     void get() {
         for (int name = 0; name < names.length; name++)
             assertEquals(marks[name], map.get(names[name]));
+    }
+
+    @Test
+    void contains() {
+        int randomNameIdx = ThreadLocalRandom.current().nextInt(0, names.length);
+        assertTrue(map.contains(names[randomNameIdx]));
+
+        map.remove(names[randomNameIdx]);
+        assertFalse(map.contains(names[randomNameIdx]));
     }
 
     @Test
