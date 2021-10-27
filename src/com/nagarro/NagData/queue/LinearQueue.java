@@ -1,4 +1,6 @@
-package com.nagarro.NagData;
+package com.nagarro.NagData.queue;
+
+import com.nagarro.NagData.LinkedList;
 
 /**
  * A <tt>LinearQueue</tt> implemented using a <tt>LinkedList</tt>.

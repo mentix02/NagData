@@ -1,4 +1,4 @@
-package com.nagarro.NagData;
+package com.nagarro.NagData.queue;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class LinearQueueTest {
 
     static LinearQueue<Integer> queue;
-    final static int qSize = 100;
 
     @BeforeEach
     void setUp() {

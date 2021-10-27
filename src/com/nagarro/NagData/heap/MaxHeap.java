@@ -1,4 +1,6 @@
-package com.nagarro.NagData;
+package com.nagarro.NagData.heap;
+
+import com.nagarro.NagData.Vector;
 
 /**
  * Used to extract objects of the highest priority. Inherits

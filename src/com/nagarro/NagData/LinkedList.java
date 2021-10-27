@@ -1,5 +1,7 @@
 package com.nagarro.NagData;
 
+import com.nagarro.NagData.queue.LinearQueue;
+
 import java.util.Objects;
 import java.util.Iterator;
 import java.util.Collection;
@@ -67,7 +69,7 @@ class LinkedListIterator<E> implements Iterator<E> {
 /**
  * <tt>LinkedList</tt> implements a generic doubly linked list that supports
  * iteration, insertion, deletion, and other helpful methods. Also used to
- * implement the {@link com.nagarro.NagData.LinearQueue Queue} data structure.
+ * implement the {@link LinearQueue Queue} data structure.
  *
  * @param <E> type of element to store
  * @author mentix02

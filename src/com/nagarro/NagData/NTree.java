@@ -1,5 +1,8 @@
 package com.nagarro.NagData;
 
+import com.nagarro.NagData.queue.LinearQueue;
+import com.nagarro.NagData.queue.Queue;
+
 import java.util.Iterator;
 import java.util.Objects;
 

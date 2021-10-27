@@ -1,4 +1,7 @@
-package com.nagarro.NagData;
+package com.nagarro.NagData.queue;
+
+import com.nagarro.NagData.Vector;
+import com.nagarro.NagData.heap.MinHeap;
 
 import java.util.Iterator;
 
