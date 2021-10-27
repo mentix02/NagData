@@ -21,7 +21,7 @@ public class Stack<E> extends Vector<E> {
 
     @Override
     public boolean isFull() {
-        return top == _capacity - 1;
+        return top == capacity - 1;
     }
 
     @Override

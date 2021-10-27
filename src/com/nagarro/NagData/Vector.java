@@ -45,22 +45,22 @@ public class Vector<E> implements NagCollection<E> {
      * Actual container to store data in.
      */
     protected Object[] data;
-    protected int _capacity = MIN_INITIAL_CAPACITY;
+    protected int capacity = MIN_INITIAL_CAPACITY;
 
     // Constructors
 
     public Vector() {
-        data = new Object[_capacity];
+        data = new Object[capacity];
     }
 
     /**
      * Initialize a <code>Vector</code> object with a provided initial capacity.
      *
-     * @param size number of items to reserve memory for
+     * @param capacity number of items to reserve memory for
      */
-    public Vector(int size) {
-        _capacity = size;
-        data = new Object[_capacity];
+    public Vector(int capacity) {
+        this.capacity = capacity;
+        data = new Object[capacity];
     }
 
     /**
@@ -70,8 +70,8 @@ public class Vector<E> implements NagCollection<E> {
      */
     public Vector(Collection<? extends E> c) {
         int idx = 0;
-        length = _capacity = c.size();
-        data = new Object[_capacity];
+        length = capacity = c.size();
+        data = new Object[capacity];
         for (E el : c)
             data[idx++] = el;
     }
@@ -90,7 +90,7 @@ public class Vector<E> implements NagCollection<E> {
     }
 
     public int capacity() {
-        return _capacity;
+        return capacity;
     }
 
     public boolean isEmpty() {
@@ -98,7 +98,7 @@ public class Vector<E> implements NagCollection<E> {
     }
 
     public boolean isFull() {
-        return length == _capacity;
+        return length == capacity;
     }
 
     @SuppressWarnings("unchecked")
@@ -110,7 +110,7 @@ public class Vector<E> implements NagCollection<E> {
 
     public void clear() {
         data = new Object[0];
-        length = _capacity = 0;
+        length = capacity = 0;
     }
 
     public void append(E element) {
@@ -246,16 +246,16 @@ public class Vector<E> implements NagCollection<E> {
 
     protected void growCapacity() {
         // Create a new array of twice the size
-        Object[] longerData = new Object[_capacity * 2];
+        Object[] longerData = new Object[capacity * 2];
 
         // Copy old elements into new array
-        if (_capacity >= 0)
-            System.arraycopy(data, 0, longerData, 0, _capacity);
+        if (capacity >= 0)
+            System.arraycopy(data, 0, longerData, 0, capacity);
 
         // Replace small old array with larger one
         data = longerData;
         // and update increased capacity
-        _capacity *= 2;
+        capacity *= 2;
     }
 
 }
