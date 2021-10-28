@@ -38,7 +38,7 @@ class VectorIterator<E> implements Iterator<E> {
  */
 public class Vector<E> implements NagCollection<E> {
 
-    public static final int MIN_INITIAL_CAPACITY = 10;
+    public static final int MIN_INITIAL_CAPACITY = 1 << 4;
 
     private int length = 0;
     /**
