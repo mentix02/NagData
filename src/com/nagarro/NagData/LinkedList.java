@@ -1,11 +1,17 @@
 package com.nagarro.NagData;
 
-import com.nagarro.NagData.queue.LinearQueue;
-
 import java.util.Objects;
 import java.util.Iterator;
 import java.util.Collection;
 
+/**
+ * Basic building block for {@link LinkedList}. Nothing but a
+ * struct to keep track of an element, a ref to the next and
+ * previous node.
+ *
+ * @param <E> type of element to store
+ * @author mentix02
+ */
 class LinkedListNode<E> {
 
     private final E data;
@@ -67,9 +73,9 @@ class LinkedListIterator<E> implements Iterator<E> {
 }
 
 /**
- * <tt>LinkedList</tt> implements a generic doubly linked list that supports
+ * <code>LinkedList</code> implements a generic doubly linked list that supports
  * iteration, insertion, deletion, and other helpful methods. Also used to
- * implement the {@link LinearQueue Queue} data structure.
+ * implement the {@link com.nagarro.NagData.queue.LinearQueue LinearQueue} data structure.
  *
  * @param <E> type of element to store
  * @author mentix02
