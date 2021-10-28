@@ -85,9 +85,6 @@ public class NTree<E> implements NagCollection<E> {
 
     // Constructors
 
-    public NTree() {
-    }
-
     public NTree(E value) {
         this.data = value;
     }
@@ -166,6 +163,12 @@ public class NTree<E> implements NagCollection<E> {
         return children;
     }
 
+    // Setters
+
+    public void setData(E data) {
+        this.data = data;
+    }
+
     // Manipulation
 
     public NTree<E> addChild(E element) {
@@ -225,7 +228,7 @@ public class NTree<E> implements NagCollection<E> {
 
     @Override
     public String toString() {
-        return String.format("{ val: %s, childrenSize: %d }", this.data.toString(), this.children.size());
+        return String.format("{ val: %s, children: %d }", this.data.toString(), this.children.size());
     }
 
 }
